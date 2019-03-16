@@ -7,14 +7,32 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var jsonTarget: UITextField!
+    @IBOutlet weak var jsonResult: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    @IBAction func sendGetRequest(_ sender: UIButton) {
+        let urlString:String = jsonTarget.text!
+        
+        print("gonna SEND🤞")
+        Alamofire.request(urlString).responseJSON
+            { response in
+                if let json = response.result.value
+                {
+                    print("JSON: \(json)")
+                    self.jsonResult.text = json as? String
+                }
 
-
+        }
+        
 }
 
+}
