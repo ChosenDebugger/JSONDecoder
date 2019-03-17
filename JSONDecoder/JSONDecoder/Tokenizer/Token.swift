@@ -22,13 +22,19 @@ enum TokenType : UInt16
     case SEP_COMMA
     case END_DOCUMENT
     
-    //Tupe
+    //Maybe we should try [Tupe]
+    //var value?
 }
 
 class Token
 {
-    var tokenType:TokenType
-    var value:String
+    var tokenType:TokenType?
+    var value:String?
+    
+    init(){
+        self.tokenType = nil
+        self.value = nil
+    }
     
     init(tokenType:TokenType, value:String) {
         self.tokenType = tokenType
@@ -36,7 +42,7 @@ class Token
     }
     
     func getTokenType()->TokenType{
-        return tokenType
+        return tokenType!
     }
     
     func setTokenType(tokenType:TokenType){
@@ -44,10 +50,12 @@ class Token
     }
     
     func getValue()->String{
-        return value
+        return value!
     }
     
     func setValue(value:String){
         self.value = value
     }
+    
+    //Where is toString ??
 }

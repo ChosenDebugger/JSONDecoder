@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F10EA5D1223CE767003FDBF4 /* tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5D0223CE767003FDBF4 /* tokenizer.swift */; };
+		F10EA5D1223CE767003FDBF4 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5D0223CE767003FDBF4 /* Token.swift */; };
 		F10EA5DA223CEF19003FDBF4 /* ReaderChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5D9223CEF19003FDBF4 /* ReaderChar.swift */; };
 		F10EA5DC223CF3B8003FDBF4 /* TokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5DB223CF3B8003FDBF4 /* TokenList.swift */; };
+		F10EA5DE223DE9F6003FDBF4 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5DD223DE9F6003FDBF4 /* Tokenizer.swift */; };
+		F10EA5E1223E28C5003FDBF4 /* JsonObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5E0223E28C5003FDBF4 /* JsonObject.swift */; };
+		F10EA5E3223E28CF003FDBF4 /* JsonArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5E2223E28CF003FDBF4 /* JsonArray.swift */; };
+		F10EA5E8223E3A46003FDBF4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5E7223E3A46003FDBF4 /* Parser.swift */; };
+		F10EA5EA223E3E70003FDBF4 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10EA5E9223E3E70003FDBF4 /* JsonParser.swift */; };
 		F155025D223BC5CE0026B6A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F155025C223BC5CE0026B6A1 /* AppDelegate.swift */; };
 		F155025F223BC5CE0026B6A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F155025E223BC5CE0026B6A1 /* ViewController.swift */; };
 		F1550262223BC5CE0026B6A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1550260223BC5CE0026B6A1 /* Main.storyboard */; };
@@ -17,6 +22,7 @@
 		F1550267223BC5CF0026B6A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1550265223BC5CF0026B6A1 /* LaunchScreen.storyboard */; };
 		F15502D8223BEDB20026B6A1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F15502CB223BED7F0026B6A1 /* Alamofire.framework */; };
 		F15502D9223BEDB20026B6A1 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F15502CB223BED7F0026B6A1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F167B588223EAD9C007568F1 /* exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = F167B587223EAD9C007568F1 /* exception.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,9 +99,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F10EA5D0223CE767003FDBF4 /* tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tokenizer.swift; sourceTree = "<group>"; };
+		F10EA5D0223CE767003FDBF4 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		F10EA5D9223CEF19003FDBF4 /* ReaderChar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderChar.swift; sourceTree = "<group>"; };
 		F10EA5DB223CF3B8003FDBF4 /* TokenList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenList.swift; sourceTree = "<group>"; };
+		F10EA5DD223DE9F6003FDBF4 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		F10EA5E0223E28C5003FDBF4 /* JsonObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonObject.swift; sourceTree = "<group>"; };
+		F10EA5E2223E28CF003FDBF4 /* JsonArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonArray.swift; sourceTree = "<group>"; };
+		F10EA5E7223E3A46003FDBF4 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		F10EA5E9223E3E70003FDBF4 /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		F1550259223BC5CE0026B6A1 /* JSONDecoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSONDecoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F155025C223BC5CE0026B6A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F155025E223BC5CE0026B6A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +115,7 @@
 		F1550266223BC5CF0026B6A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1550268223BC5CF0026B6A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F15502BF223BED7F0026B6A1 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../Alamofire-4.8.0/Alamofire.xcodeproj"; sourceTree = "<group>"; };
+		F167B587223EAD9C007568F1 /* exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exception.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +130,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F10EA5DF223E2899003FDBF4 /* JsonDescription */ = {
+			isa = PBXGroup;
+			children = (
+				F10EA5E0223E28C5003FDBF4 /* JsonObject.swift */,
+				F10EA5E2223E28CF003FDBF4 /* JsonArray.swift */,
+			);
+			path = JsonDescription;
+			sourceTree = "<group>";
+		};
+		F10EA5E4223E39DA003FDBF4 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				F10EA5E7223E3A46003FDBF4 /* Parser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		F10EA5E6223E3A28003FDBF4 /* Tokenizer */ = {
+			isa = PBXGroup;
+			children = (
+				F10EA5D0223CE767003FDBF4 /* Token.swift */,
+				F10EA5D9223CEF19003FDBF4 /* ReaderChar.swift */,
+				F10EA5DB223CF3B8003FDBF4 /* TokenList.swift */,
+				F10EA5DD223DE9F6003FDBF4 /* Tokenizer.swift */,
+			);
+			path = Tokenizer;
+			sourceTree = "<group>";
+		};
 		F1550250223BC5CE0026B6A1 = {
 			isa = PBXGroup;
 			children = (
@@ -138,13 +178,15 @@
 		F155025B223BC5CE0026B6A1 /* JSONDecoder */ = {
 			isa = PBXGroup;
 			children = (
-				F1550268223BC5CF0026B6A1 /* Info.plist */,
-				F155026E223BC6180026B6A1 /* SupportingFiles */,
+				F10EA5E4223E39DA003FDBF4 /* Parser */,
+				F10EA5DF223E2899003FDBF4 /* JsonDescription */,
+				F10EA5E6223E3A28003FDBF4 /* Tokenizer */,
+				F10EA5E9223E3E70003FDBF4 /* JsonParser.swift */,
+				F167B587223EAD9C007568F1 /* exception.swift */,
 				F155025E223BC5CE0026B6A1 /* ViewController.swift */,
 				F1550260223BC5CE0026B6A1 /* Main.storyboard */,
-				F10EA5D0223CE767003FDBF4 /* tokenizer.swift */,
-				F10EA5D9223CEF19003FDBF4 /* ReaderChar.swift */,
-				F10EA5DB223CF3B8003FDBF4 /* TokenList.swift */,
+				F1550268223BC5CF0026B6A1 /* Info.plist */,
+				F155026E223BC6180026B6A1 /* SupportingFiles */,
 			);
 			path = JSONDecoder;
 			sourceTree = "<group>";
@@ -304,10 +346,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F10EA5E1223E28C5003FDBF4 /* JsonObject.swift in Sources */,
+				F10EA5DE223DE9F6003FDBF4 /* Tokenizer.swift in Sources */,
 				F10EA5DC223CF3B8003FDBF4 /* TokenList.swift in Sources */,
+				F10EA5E3223E28CF003FDBF4 /* JsonArray.swift in Sources */,
+				F167B588223EAD9C007568F1 /* exception.swift in Sources */,
 				F10EA5DA223CEF19003FDBF4 /* ReaderChar.swift in Sources */,
+				F10EA5EA223E3E70003FDBF4 /* JsonParser.swift in Sources */,
+				F10EA5E8223E3A46003FDBF4 /* Parser.swift in Sources */,
 				F155025F223BC5CE0026B6A1 /* ViewController.swift in Sources */,
-				F10EA5D1223CE767003FDBF4 /* tokenizer.swift in Sources */,
+				F10EA5D1223CE767003FDBF4 /* Token.swift in Sources */,
 				F155025D223BC5CE0026B6A1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

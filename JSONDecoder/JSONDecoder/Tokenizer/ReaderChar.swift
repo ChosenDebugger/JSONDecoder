@@ -18,8 +18,29 @@ class ReaderChar
     var index = -1              //-1 equals nothing
     var size = 0
     
-    init() {
-        //jsonTarget =
+    init(){
+        
+    }
+    
+    init(_ jsonTarget:String) {
+        self.jsonTarget = jsonTarget
+    }
+    
+    func peek() -> Character{
+        return buffer[index]
+    }
+    
+    func next() -> Character{
+        if !hasMore(){
+            return "\0"
+        }
+        
+        index = index + 1
+        return buffer[index]
+    }
+    
+    func back() -> Void{
+        index = max(0, -index)
     }
     
     
