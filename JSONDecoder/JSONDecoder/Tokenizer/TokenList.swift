@@ -17,6 +17,7 @@ class TokenList
         tokens.append(token)
     }
     
+    //查看当前index 所指
     func peek() -> Token?{
         if index < tokens.count{
             return tokens[index]
@@ -29,6 +30,7 @@ class TokenList
         if index - 1 < 0{
             return nil
         }else{
+            //might go wrong
             return tokens[index-2]
         }
     }
@@ -43,3 +45,4 @@ class TokenList
     
     //Where is toString() ??
 }
+

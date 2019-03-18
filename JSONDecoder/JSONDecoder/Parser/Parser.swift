@@ -24,11 +24,11 @@ class Parser{
     
     func parse(_ tokens:TokenList) ->Any{
         self.tokens = tokens
-        return parse()
+        return parse()!
     }
     
     
-    func parse()throws ->Any{
+    func parse() ->Any?{
         let token = tokens.next()
         
         if token == nil{
@@ -41,43 +41,44 @@ class Parser{
             return parseJsonArray()
         }
         else{
-            throw JsonParseException.InvalidToken
+            print("Invalid Token")
         }
+        return nil
     }
 
-    func parseJsonObject()throws -> JsonObject {
+    func parseJsonObject()-> JsonObject {
         let jsonObject = JsonObject()
         var expectToken = STRING_TOKEN | END_ARRAY_TOKEN
         var key = ""
         var value = ""
         
         while tokens.hasMore(){
-            let token = tokens.next()
-            let tokenType = token!.getTokenType()
-            let tokenValue = token!.getValue()
+            let token = tokens.next()!
+            let tokenType = token.getTokenType()
+            let tokenValue = token.getValue()
             
-            switch tokenType{
+            switch tokenType!{
             case .BEGIN_OBJECT:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 jsonObject.put(key, parseJsonObject())
                 expectToken = SEP_COMMA_TOKEN | END_OBJECT_TOKEN
             case .END_OBJECT:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 return jsonObject
             case TokenType.BEGIN_ARRAY:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 jsonObject.put(key, parseJsonArray())
                 expectToken = SEP_COLON_TOKEN | END_OBJECT_TOKEN
             case .NULL:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 //没有null 暂时用“”替代
                 jsonObject.put(key, "")
             case .NUMBER:
-                checkExpectToken(tokenType, expectToken)
-                if tokenValue.contains(".") || tokenValue.contains("e") || tokenValue.contains("E"){
-                    jsonObject.put(key, (tokenValue as NSString).doubleValue)
+                checkExpectToken(tokenType!, expectToken)
+                if tokenValue!.contains(".") || tokenValue!.contains("e") || tokenValue!.contains("E"){
+                    jsonObject.put(key, (tokenValue! as NSString).doubleValue)
                 }else{
-                    let num = (tokenValue as NSString).intValue
+                    let num = (tokenValue! as NSString).intValue
                     if num > Int.max || num < Int.min{
                         jsonObject.put(key, num)
                     }else {
@@ -86,37 +87,38 @@ class Parser{
                     expectToken = SEP_COMMA_TOKEN | END_OBJECT_TOKEN
                 }
             case .STRING:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 let preToken = tokens.peekPre()
                 if preToken!.getTokenType() == TokenType.SEP_COLON{
-                    value = token!.getValue()
+                    value = token.getValue()!
                     jsonObject.put(key, value)
                     expectToken = SEP_COMMA_TOKEN | END_OBJECT_TOKEN
                 }else{
-                    key = token!.getValue()
+                    key = token.getValue()!
                     expectToken = SEP_COLON_TOKEN
                 }
             case .BOOLEAN:
-                checkExpectToken(tokenType, expectToken)
-                jsonObject.put(key, (tokenValue as NSString).boolValue)
+                checkExpectToken(tokenType!, expectToken)
+                jsonObject.put(key, (tokenValue! as NSString).boolValue)
                 expectToken = SEP_COMMA_TOKEN | END_OBJECT_TOKEN
             case .SEP_COLON:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 expectToken = NULL_TOKEN | NUMBER_TOKEN | BOOLEAN_TOKEN | STRING_TOKEN | BEGIN_OBJECT_TOKEN | BEGIN_ARRAY_TOKEN
             case .SEP_COMMA:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 expectToken = STRING_TOKEN
             case .END_DOCUMENT:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 return jsonObject
             default:
-                throw JsonParseException.UnexpectedToken
+                print("Unexpected Token")
             }
         }
-        throw JsonParseException.InvalidToken
+        print("Invalid Token")
+        return JsonObject()
     }
     
-    func parseJsonArray()throws -> Any{
+    func parseJsonArray() -> Any{
         var expectToken = BEGIN_ARRAY_TOKEN | END_ARRAY_TOKEN | BEGIN_OBJECT_TOKEN | NULL_TOKEN | NUMBER_TOKEN | BOOLEAN_TOKEN | STRING_TOKEN
         let jsonArray = JsonArray()
         
@@ -125,28 +127,28 @@ class Parser{
             let tokenType = token!.getTokenType()
             let tokenValue = token!.getValue()
             
-            switch tokenType {
+            switch tokenType! {
             case TokenType.BEGIN_OBJECT:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 jsonArray.add(parseJsonObject())
                 expectToken = SEP_COMMA_TOKEN | END_ARRAY_TOKEN
             case .BEGIN_ARRAY:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 jsonArray.add(parseJsonArray())
                 expectToken = SEP_COMMA_TOKEN | END_ARRAY_TOKEN
             case .END_ARRAY:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 return jsonArray
             case .NULL:
-                checkExpectToken(tokenType, expectToken)
-//                jsonArray.add(null)
+                checkExpectToken(tokenType!, expectToken)
+                jsonArray.add("")
                 expectToken = SEP_COMMA_TOKEN | END_ARRAY_TOKEN
             case .NUMBER:
-                checkExpectToken(tokenType, expectToken)
-                if tokenValue.contains(".") || tokenValue.contains("e") || tokenValue.contains("E"){
-                    jsonArray.add((tokenValue as NSString).doubleValue)
+                checkExpectToken(tokenType!, expectToken)
+                if tokenValue!.contains(".") || tokenValue!.contains("e") || tokenValue!.contains("E"){
+                    jsonArray.add((tokenValue! as NSString).doubleValue)
                 }else {
-                    let num = (tokenValue as NSString).longLongValue
+                    let num = (tokenValue! as NSString).longLongValue
                     if num > Int.max || num < Int.min{
                         jsonArray.add(num)
                     }else{
@@ -155,29 +157,30 @@ class Parser{
                 }
                 expectToken = SEP_COMMA_TOKEN | END_ARRAY_TOKEN
             case .STRING:
-                checkExpectToken(tokenType, expectToken)
-                jsonArray.add(tokenValue)
+                checkExpectToken(tokenType!, expectToken)
+                jsonArray.add(tokenValue as Any)
                 expectToken = SEP_COMMA_TOKEN | END_ARRAY_TOKEN
             case .BOOLEAN:
-                checkExpectToken(tokenType, expectToken)
-                jsonArray.add((tokenValue as NSString).boolValue)
+                checkExpectToken(tokenType!, expectToken)
+                jsonArray.add((tokenValue! as NSString).boolValue)
                 expectToken = SEP_COMMA_TOKEN | END_ARRAY_TOKEN
             case .SEP_COMMA:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 expectToken = STRING_TOKEN | NULL_TOKEN | NUMBER_TOKEN | BOOLEAN_TOKEN | BEGIN_ARRAY_TOKEN | BEGIN_OBJECT_TOKEN
             case .END_DOCUMENT:
-                checkExpectToken(tokenType, expectToken)
+                checkExpectToken(tokenType!, expectToken)
                 return jsonArray
             default:
-                throw JsonParseException.UnexpectedToken
+                print("Unexpected Token")
             }
         }
-        throw JsonParseException.InvalidToken
+        print("Invalid Token")
+        return jsonArray
     }
     
-    func checkExpectToken(_ tokenType: TokenType, _ expectToken: Int)throws -> Void {
+    func checkExpectToken(_ tokenType: TokenType, _ expectToken: Int) -> Void {
         if (tokenType.rawValue & UInt16(expectToken)) == 0{
-            throw JsonParseException.InvalidToken
+            print("Invalid Token")
         }
     }
 }

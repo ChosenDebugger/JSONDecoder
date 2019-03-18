@@ -6,13 +6,13 @@
 //  Copyright © 2019 齐旭晨. All rights reserved.
 //
 
-import Foundation
-
-enum JsonParseException: Error{
-    case InvalidToken
-    case UnexpectedToken
-}
-
-enum JsonTypeException: Error{
-    case 
-}
+//import Foundation
+//
+//enum JsonParseException: Error{
+//    case InvalidToken
+//    case UnexpectedToken
+//}
+//
+//enum JsonTypeException: Error{
+//    case
+//}

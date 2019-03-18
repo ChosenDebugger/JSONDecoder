@@ -14,21 +14,12 @@ import Foundation
 
 class Tokenizer {
     
-    var jsonString = String()
+    var jsonString = ""
     var reader = ReaderChar()
     var tokenlist = TokenList()
 
     func decode(_ jsonString:String) -> Void{
-        
         self.jsonString = jsonString
-        
-    }
-
-    func getTokenStream() -> TokenList{
-        
-        tokenizer()
-        
-        return tokenlist
     }
 
     func getTokenStream(with reader:ReaderChar) -> TokenList{
@@ -91,11 +82,10 @@ class Tokenizer {
         default:
             break
         }
-        
         if isPurnInt(string: String(ch)){
             return readNumber()
         }
-        
+        print("Illegal Character")
         return nil      //nil means lexical analysis ERROR
     }
     //判断字符是否为空格/换行/Tab
@@ -116,7 +106,8 @@ class Tokenizer {
     
     func readNull() -> Token{
         if !(reader.next()=="u"&&reader.next()=="l"&&reader.next()=="l"){
-            //return "Error: Invalid Json Input"
+            print("Invalid Json Input")
+            return Token()
         }
         else{
             return Token(tokenType: TokenType.NULL, value: "null")
@@ -127,7 +118,8 @@ class Tokenizer {
     func readBool() -> Token{
         if reader.peek() == "t"{
             if !(reader.next()=="r"&&reader.next()=="u"&&reader.next()=="e"){
-                //return "Error: Invalid Json Input"
+                print("unexpected Token")
+                return Token()
             }
             else{
                 return Token(tokenType: TokenType.BOOLEAN, value: "true")
@@ -135,7 +127,8 @@ class Tokenizer {
         }
         else{
             if !(reader.next()=="a"&&reader.next()=="l"&&reader.next()=="s"&&reader.next()=="e"){
-                //return "Error: Invalid Json Input"
+               print("Invalid Json Input")
+                return Token()
             }else{
                 return Token(tokenType: TokenType.BOOLEAN, value: "false")
             }
@@ -149,9 +142,11 @@ class Tokenizer {
         while(true){
             var ch = reader.next()
             
+            //转义字符
             if ch == "\\"{
-                
-                //if (!isEscape()){ return error}    check if there's 乱传转义字符
+                if (!isEscape()){
+                    print("Invalid Escape Character")
+                }
                 
                 stringBuilder.append("\\")
                 ch = reader.peek()
@@ -162,7 +157,7 @@ class Tokenizer {
                         if isHex(ch){
                             stringBuilder.append(ch)
                         }else{
-                            //return error
+                            print("Invalid Unicode Character")
                         }
                     }
                 }
@@ -170,7 +165,7 @@ class Tokenizer {
                     return Token(tokenType: TokenType.STRING, value: String(stringBuilder))
                 }
                 else if ch == "\r" || ch == "\n"{
-                    //return error        //Json 字符串不允许换行
+                    print("Invalid line feed")
                 }
                 else{
                     stringBuilder.append(ch)
@@ -205,13 +200,12 @@ class Tokenizer {
                     stringBuilder.append(ch)
                     ch = reader.next()
                 }while isDigit(ch)
-//                (Char) - 1
-//                if ch != (Char) - 1{
+//                if ch != nil{
 //                    reader.back()
 //                    stringBuilder.append(readFracAndExp())
 //                }
             }else{
-                //return "Invalid minus number"
+                print("Invalid minus number")
             }
         }else if ch == "0"{
             stringBuilder.append(ch)
@@ -221,7 +215,6 @@ class Tokenizer {
                 stringBuilder.append(ch)
                 ch = reader.next()
             }while isDigit(ch)
-//            (Char) - 1
 //            if ch != (Char)-1{
 //                reader.back()
 //                stringBuilder.append(readFracAndExp())
@@ -233,9 +226,9 @@ class Tokenizer {
     func readFracAndExp() -> String{
         var stringBilder = ""
         var ch = reader.next()
-//        if !isDigit(ch){
-//            throw "Invalid Frac"
-//        }
+        if !isDigit(ch){
+            print("Invalid frac")
+        }
         if ch == "."{
         repeat{
             stringBilder.append(ch)
@@ -279,10 +272,10 @@ class Tokenizer {
                     reader.back()
                 }
             }else{
-//                throw "e or E"
+                print("e or E")
             }
         }else{
-//            throw "e or E"
+            print("e or E")
         }
         return stringBuilder
     }

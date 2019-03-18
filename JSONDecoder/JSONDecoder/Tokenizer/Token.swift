@@ -10,20 +10,17 @@ import Foundation
 
 enum TokenType : UInt16
 {
-    case BEGIN_OBJECT
-    case END_OBJECT
-    case BEGIN_ARRAY
-    case END_ARRAY
-    case NULL
-    case NUMBER
-    case STRING
-    case BOOLEAN
-    case SEP_COLON
-    case SEP_COMMA
-    case END_DOCUMENT
-    
-    //Maybe we should try [Tupe]
-    //var value?
+    case BEGIN_OBJECT = 1
+    case END_OBJECT = 2
+    case BEGIN_ARRAY = 4
+    case END_ARRAY = 8
+    case NULL = 16
+    case NUMBER = 32
+    case STRING = 64
+    case BOOLEAN = 128
+    case SEP_COLON = 256
+    case SEP_COMMA = 512
+    case END_DOCUMENT = 1024
 }
 
 class Token
@@ -41,21 +38,19 @@ class Token
         self.value = value
     }
     
-    func getTokenType()->TokenType{
-        return tokenType!
+    func getTokenType()->TokenType?{
+        return tokenType
     }
     
     func setTokenType(tokenType:TokenType){
         self.tokenType = tokenType
     }
     
-    func getValue()->String{
-        return value!
+    func getValue()->String?{
+        return value
     }
     
     func setValue(value:String){
         self.value = value
     }
-    
-    //Where is toString ??
 }

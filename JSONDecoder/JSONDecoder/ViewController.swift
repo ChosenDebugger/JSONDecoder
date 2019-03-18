@@ -11,6 +11,8 @@ import Alamofire
 
 class ViewController: UIViewController {
     
+//    let jsonparser = JsonParser()
+    
     @IBOutlet weak var jsonTarget: UITextField!
     @IBOutlet weak var jsonResult: UILabel!
     

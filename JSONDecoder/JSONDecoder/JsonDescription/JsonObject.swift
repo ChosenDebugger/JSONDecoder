@@ -9,7 +9,7 @@
 import Foundation
 
 class JsonObject{
-    var dict = Dictionary<String, Any>()
+    var dict = Dictionary<String, Any?>()
     
     func put(_ key:String, _ value:Any){
         dict[key] = value

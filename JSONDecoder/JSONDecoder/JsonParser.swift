@@ -10,7 +10,6 @@ import Foundation
 
 class JsonParser{
     let tokenizer = Tokenizer()
-    
     let parser = Parser()
     
     func main_parser(_ jsonTarget:String) -> Any{

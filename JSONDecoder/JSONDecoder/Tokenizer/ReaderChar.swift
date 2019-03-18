@@ -10,7 +10,7 @@ import Foundation
 
 class ReaderChar
 {
-    let jsonTarget = ""
+    var jsonTarget = ""
     let BUFFER_SIZE = 1024
     
     var reader = ""
@@ -43,9 +43,11 @@ class ReaderChar
         index = max(0, -index)
     }
     
-    
-    
     func hasMore() -> Bool{
+        if index == -1 {
+            print("Reader is Empty!")
+            return false
+        }
         if index < size{
             return true
         }
