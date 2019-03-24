@@ -18,5 +18,4 @@ class JsonParser{
         
         return parser.parse(tokens)
     }
-    
 }

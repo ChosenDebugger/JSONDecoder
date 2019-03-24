@@ -36,7 +36,9 @@ class TokenList
     }
     
     func next() -> Token?{
-        return tokens[+index]
+        let temp = tokens[index]
+        index += 1
+        return temp
     }
     
     func hasMore() -> Bool{

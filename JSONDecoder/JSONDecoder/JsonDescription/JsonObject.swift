@@ -19,5 +19,21 @@ class JsonObject{
         return dict[key] as! Dictionary<String, Any>
     }
     
+    func isEmpty() -> Bool {
+        return dict.isEmpty
+    }
     
+    func getAllKeyValue() -> [(String, Any?)]{
+        var allTupe = Array<(String, Any?)>()
+        
+        for (key, value) in dict{
+            allTupe.append((key, value))
+        }
+        return allTupe
+    }
+    
+    func toString() -> String{
+        let formater = Formater()
+        return formater.format(jsonObject: self)
+    }
 }

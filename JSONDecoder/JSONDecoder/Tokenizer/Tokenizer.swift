@@ -86,10 +86,11 @@ class Tokenizer {
             return readNumber()
         }
         print("Illegal Character")
-        return nil      //nil means lexical analysis ERROR
+        return Token()
     }
     //判断字符是否为空格/换行/Tab
     func isWhiteSpace(_ ch:Character) -> Bool{
+        
         return (ch == " "||ch == "\t"||ch == "\r"||ch == "\n")
     }
     //判断字符是否为数字
@@ -116,23 +117,19 @@ class Tokenizer {
 
     
     func readBool() -> Token{
-        if reader.peek() == "t"{
-            if !(reader.next()=="r"&&reader.next()=="u"&&reader.next()=="e"){
-                print("unexpected Token")
-                return Token()
-            }
-            else{
-                return Token(tokenType: TokenType.BOOLEAN, value: "true")
-            }
-        }
+        if reader.peek() == "r"{
+            if reader.next() == "u" {
+                if reader.next() == "e"{
+                    return Token(tokenType: TokenType.BOOLEAN, value: "true")}}}
         else{
-            if !(reader.next()=="a"&&reader.next()=="l"&&reader.next()=="s"&&reader.next()=="e"){
-               print("Invalid Json Input")
-                return Token()
-            }else{
-                return Token(tokenType: TokenType.BOOLEAN, value: "false")
-            }
-        }
+            if reader.next() == "a"{
+                if reader.next() == "l"{
+                    if reader.next() == "s"{
+                        if reader.next() == "e"{
+                            return Token(tokenType: TokenType.BOOLEAN, value: "false")}}}}}
+        
+        print("Invalid Json Input")
+        return Token()
     }
     
     
@@ -161,15 +158,14 @@ class Tokenizer {
                         }
                     }
                 }
-                else if ch == "\""{
-                    return Token(tokenType: TokenType.STRING, value: String(stringBuilder))
-                }
-                else if ch == "\r" || ch == "\n"{
-                    print("Invalid line feed")
-                }
-                else{
-                    stringBuilder.append(ch)
-                }
+            }else if ch == "\""{
+                return Token(tokenType: TokenType.STRING, value: String(stringBuilder))
+            }
+            else if ch == "\r" || ch == "\n"{
+                print("Invalid line feed")
+            }
+            else{
+                stringBuilder.append(ch)
             }
         }
     }

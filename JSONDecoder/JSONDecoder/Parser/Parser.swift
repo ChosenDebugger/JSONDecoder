@@ -24,7 +24,7 @@ class Parser{
     
     func parse(_ tokens:TokenList) ->Any{
         self.tokens = tokens
-        return parse()!
+        return parse()
     }
     
     
@@ -42,8 +42,8 @@ class Parser{
         }
         else{
             print("Invalid Token")
+            return JsonObject()
         }
-        return nil
     }
 
     func parseJsonObject()-> JsonObject {
@@ -114,8 +114,7 @@ class Parser{
                 print("Unexpected Token")
             }
         }
-        print("Invalid Token")
-        return JsonObject()
+        return jsonObject
     }
     
     func parseJsonArray() -> Any{
@@ -174,7 +173,6 @@ class Parser{
                 print("Unexpected Token")
             }
         }
-        print("Invalid Token")
         return jsonArray
     }
     

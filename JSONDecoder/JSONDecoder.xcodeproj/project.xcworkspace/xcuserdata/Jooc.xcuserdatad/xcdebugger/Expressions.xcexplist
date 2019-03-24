@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ReaderChar.fillBuffer():ReaderChar.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ReaderChar.init(_:):ReaderChar.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Tokenizer.tokenizer():Tokenizer.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ReaderChar.hasMore():ReaderChar.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ReaderChar.next():ReaderChar.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Parser.parseJsonObject():Parser.swift">
+      </ContextState>
+      <ContextState
+         contextName = "JsonParser.main_parser(_:):JsonParser.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Parser.parseJsonArray():Parser.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Parser.parse():Parser.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Tokenizer.readBool():Tokenizer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "reader.peek()">
+            </PersistentString>
+            <PersistentString
+               value = "reader.next()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Tokenizer.getTokenStream(with:):Tokenizer.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Tokenizer.start():Tokenizer.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.sendGetRequest(_:):ViewController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

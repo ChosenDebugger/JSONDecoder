@@ -13,13 +13,11 @@ class ReaderChar
     var jsonTarget = ""
     let BUFFER_SIZE = 1024
     
-    var reader = ""
     var buffer = [Character]()
-    var index = -1              //-1 equals nothing
+    var index = 0              //-1 equals nothing
     var size = 0
     
     init(){
-        
     }
     
     init(_ jsonTarget:String) {
@@ -35,8 +33,10 @@ class ReaderChar
             return "\0"
         }
         
+        let temp = buffer[index]
         index = index + 1
-        return buffer[index]
+        
+        return temp
     }
     
     func back() -> Void{
@@ -44,25 +44,30 @@ class ReaderChar
     }
     
     func hasMore() -> Bool{
-        if index == -1 {
-            print("Reader is Empty!")
-            return false
-        }
         if index < size{
             return true
         }
         
-        fillBuffer(with: jsonTarget)
-        return false
+        fillBuffer()
+        return index < size
     }
     
-    func fillBuffer(with jsonTarget:String) -> Void {
+    func fillBuffer() -> Void {
         if jsonTarget.isEmpty{ return }
+        
+        buffer = [Character]()
         
         let length = jsonTarget.count<BUFFER_SIZE ? jsonTarget.count : BUFFER_SIZE
         
         let indexOfBufferInJson = jsonTarget.index(jsonTarget.startIndex, offsetBy: length-1)
-        reader = String(jsonTarget[...indexOfBufferInJson])
+        let reader = String(jsonTarget[...indexOfBufferInJson])
+        
+        let range = jsonTarget.startIndex...(jsonTarget.index(jsonTarget.startIndex, offsetBy: length-1))
+        jsonTarget.removeSubrange(range)
+        
+        for character in reader{
+            buffer.append(character)
+        }
         
         index = 0
         size = length

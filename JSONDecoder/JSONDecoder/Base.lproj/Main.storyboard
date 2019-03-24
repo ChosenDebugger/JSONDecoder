@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input the URL of JSON target" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0b9-gz-lED">
-                                <rect key="frame" x="14" y="75" width="343" height="30"/>
+                                <rect key="frame" x="14" y="75" width="345" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -28,22 +28,6 @@
                                     <action selector="textFieldShouldReturn:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Xgc-DC-Vfg"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cl-Bd-CpW">
-                                <rect key="frame" x="16" y="136" width="343" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.95523184539999995" green="0.43564757079999999" blue="0.4114180409" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="GET"/>
-                                <connections>
-                                    <action selector="sendGetRequest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uSN-pr-xPc"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Result" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dU-0H-cxf">
-                                <rect key="frame" x="16" y="199" width="343" height="448"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" URL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zja-IV-RLC">
                                 <rect key="frame" x="169" y="39" width="37" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -51,12 +35,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vk5-WO-MSz">
+                                <rect key="frame" x="16" y="190" width="343" height="457"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cl-Bd-CpW">
+                                <rect key="frame" x="16" y="128" width="343" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.95523184539999995" green="0.43564757079999999" blue="0.4114180409" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Decode"/>
+                                <connections>
+                                    <action selector="sendGetRequest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uSN-pr-xPc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96854760362694303" green="0.96854760362694303" blue="0.96854760362694303" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="jsonResult" destination="4dU-0H-cxf" id="1dY-E4-yj0"/>
+                        <outlet property="jsonResult" destination="vk5-WO-MSz" id="mir-5n-K0o"/>
                         <outlet property="jsonTarget" destination="0b9-gz-lED" id="WMa-ZH-yNv"/>
                     </connections>
                 </viewController>

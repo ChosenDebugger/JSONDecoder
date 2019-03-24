@@ -11,30 +11,46 @@ import Alamofire
 
 class ViewController: UIViewController {
     
-//    let jsonparser = JsonParser()
-    
     @IBOutlet weak var jsonTarget: UITextField!
-    @IBOutlet weak var jsonResult: UILabel!
+    @IBOutlet weak var jsonResult: UITextView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     @IBAction func sendGetRequest(_ sender: UIButton) {
-        let urlString:String = jsonTarget.text!
         
-        print("gonna SEND🤞")
-        Alamofire.request(urlString).responseJSON
-            { response in
-                if let json = response.result.value
-                {
-                    print("JSON: \(json)")
-                    self.jsonResult.text = json as? String
-                }
+        let jsontarget = jsonTarget.text
+        var jsonresultStr = ""
 
+        if jsontarget == ""{
+            print("Please input the target Json-url")
+            return
         }
         
-}
-
+        let url:URL! = URL(string: jsontarget!);
+        let urlRequest:URLRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
+        var response:URLResponse?
+        
+        do {
+            let received =  try NSURLConnection.sendSynchronousRequest(urlRequest, returning: &response)
+            let dic = try JSONSerialization.jsonObject(with: received, options: JSONSerialization.ReadingOptions.allowFragments)
+            print(dic)
+            
+            jsonresultStr = String(data: received, encoding:String.Encoding.utf8)!;
+        } catch let error{
+            print(error.localizedDescription);
+        }
+        
+        let jsonparser = JsonParser()
+        let jsonresult = (jsonparser.main_parser(jsonresultStr)) as! JsonObject
+        
+        if jsonresult.isEmpty(){
+            jsonResult.text = "Nothing"
+        }
+        
+        jsonResult.text = jsonresult.toString()
+        
+    }
 }
