@@ -44,7 +44,13 @@ class Formater {
                 stringBuilder.append("\"")
                 stringBuilder.append(str)
                 stringBuilder.append("\"")
+            case let num as Int8:
+                stringBuilder.append(String(num))
+            case let num as Int16:
+                stringBuilder.append(String(num))
             case let num as Int32:
+                stringBuilder.append(String(num))
+            case let num as Int64:
                 stringBuilder.append(String(num))
             default:
                 stringBuilder.append("error")
