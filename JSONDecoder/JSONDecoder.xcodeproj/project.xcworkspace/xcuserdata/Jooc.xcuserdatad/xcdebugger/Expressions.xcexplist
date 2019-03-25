@@ -49,5 +49,11 @@
       <ContextState
          contextName = "ViewController.sendGetRequest(_:):ViewController.swift">
       </ContextState>
+      <ContextState
+         contextName = "Tokenizer.readFracAndExp():Tokenizer.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Tokenizer.readNumber():Tokenizer.swift">
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

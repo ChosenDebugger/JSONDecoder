@@ -57,6 +57,10 @@ class Parser{
             let tokenType = token.getTokenType()
             let tokenValue = token.getValue()
             
+//            if tokenType == nil{
+//                return jsonObject
+//            }
+            
             switch tokenType!{
             case .BEGIN_OBJECT:
                 checkExpectToken(tokenType!, expectToken)
@@ -79,11 +83,12 @@ class Parser{
                     jsonObject.put(key, (tokenValue! as NSString).doubleValue)
                 }else{
                     let num = (tokenValue! as NSString).intValue
-                    if num > Int.max || num < Int.min{
-                        jsonObject.put(key, num)
-                    }else {
-                        jsonObject.put(key, num)
-                    }
+                    jsonObject.put(key, num)
+//                    if num > Int.max || num < Int.min{
+//                        jsonObject.put(key, num)
+//                    }else {
+//                        jsonObject.put(key, num)
+//                    }
                     expectToken = SEP_COMMA_TOKEN | END_OBJECT_TOKEN
                 }
             case .STRING:
@@ -126,6 +131,10 @@ class Parser{
             let tokenType = token!.getTokenType()
             let tokenValue = token!.getValue()
             
+//            if tokenType == nil{
+//                return jsonArray
+//            }
+//            
             switch tokenType! {
             case TokenType.BEGIN_OBJECT:
                 checkExpectToken(tokenType!, expectToken)

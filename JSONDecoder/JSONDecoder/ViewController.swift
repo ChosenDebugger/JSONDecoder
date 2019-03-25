@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     @IBAction func sendGetRequest(_ sender: UIButton) {
         
-        let jsontarget = jsonTarget.text
+        let jsontarget = "http://news-at.zhihu.com/api/4/news/latest"
         var jsonresultStr = ""
 
         if jsontarget == ""{
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
             return
         }
         
-        let url:URL! = URL(string: jsontarget!);
+        let url:URL! = URL(string: jsontarget);
         let urlRequest:URLRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
         var response:URLResponse?
         

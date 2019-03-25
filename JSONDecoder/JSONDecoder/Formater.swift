@@ -33,7 +33,7 @@ class Formater {
             stringBuilder.append("\"")
             stringBuilder.append(":")
             
-            switch value {
+            switch value! {
             case let obj as JsonObject:
                 stringBuilder.append("\n")
                 stringBuilder.append(format(jsonObject:obj))
@@ -44,8 +44,10 @@ class Formater {
                 stringBuilder.append("\"")
                 stringBuilder.append(str)
                 stringBuilder.append("\"")
+            case let num as Int32:
+                stringBuilder.append(String(num))
             default:
-                stringBuilder.append("0")
+                stringBuilder.append("error")
 //                let temp = value as! String
 //                stringBuilder.append(temp)
 //                stringBuilder.append(value as! Character)

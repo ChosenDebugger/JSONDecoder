@@ -25,7 +25,10 @@ class ReaderChar
     }
     
     func peek() -> Character{
-        return buffer[index]
+        if index - 1 >= size {
+            return "\0"
+        }
+        return buffer[max(0, index - 1)]
     }
     
     func next() -> Character{
@@ -40,7 +43,7 @@ class ReaderChar
     }
     
     func back() -> Void{
-        index = max(0, -index)
+        index = max(0, index - 1)
     }
     
     func hasMore() -> Bool{

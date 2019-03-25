@@ -117,19 +117,21 @@ class Tokenizer {
 
     
     func readBool() -> Token{
-        if reader.peek() == "r"{
-            if reader.next() == "u" {
-                if reader.next() == "e"{
-                    return Token(tokenType: TokenType.BOOLEAN, value: "true")}}}
-        else{
-            if reader.next() == "a"{
-                if reader.next() == "l"{
-                    if reader.next() == "s"{
-                        if reader.next() == "e"{
-                            return Token(tokenType: TokenType.BOOLEAN, value: "false")}}}}}
-        
-        print("Invalid Json Input")
-        return Token()
+        if reader.peek() == "t"{
+            if !(reader.next()=="r"&&reader.next()=="u"&&reader.next()=="e"){
+                print("Invalid Json Input")
+                return Token()
+            }else{
+                return Token(tokenType: TokenType.BOOLEAN, value: "true")
+            }
+        }else{
+            if !(reader.next()=="a"&&reader.next()=="l"&&reader.next()=="s"&&reader.next()=="e"){
+                print("Invalid Json Input")
+                return Token()
+            }else{
+                return Token(tokenType: TokenType.BOOLEAN, value: "false")
+            }
+        }
     }
     
     
@@ -222,9 +224,7 @@ class Tokenizer {
     func readFracAndExp() -> String{
         var stringBilder = ""
         var ch = reader.next()
-        if !isDigit(ch){
-            print("Invalid frac")
-        }
+
         if ch == "."{
         repeat{
             stringBilder.append(ch)
