@@ -5,9 +5,11 @@
 //  Created by 齐旭晨 on 2019/3/15.
 //  Copyright © 2019 齐旭晨. All rights reserved.
 //
+//  Test-api: zhihu-latest news
+//  @: https://news-at.zhihu.com/api/4/news/latest
+//
 
 import UIKit
-import Alamofire
 
 class ViewController: UIViewController {
     
